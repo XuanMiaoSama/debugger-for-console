@@ -1,7 +1,7 @@
 import type { Range } from 'vscode'
 import { window } from 'vscode'
-import { getAllStatementRanges } from '../utils/shared'
 import { getCommentSymbol } from '../features/comment-symbol'
+import { getAllStatementRanges } from '../utils/shared'
 import { smartToggleEditor } from '../utils/smart-editor'
 
 async function toggle(type: 'comment' | 'uncomment' = 'comment') {
@@ -27,11 +27,11 @@ async function toggle(type: 'comment' | 'uncomment' = 'comment') {
   const replacer = {
     comment: (range: Range, indents: string, content: string) => {
       !content.startsWith(commentSymbols)
-        && smartEditor.replace(range, `${indents}${commentSymbols} ${content}`)
+      && smartEditor.replace(range, `${indents}${commentSymbols} ${content}`)
     },
     uncomment: (range: Range, indents: string, content: string) => {
       content.startsWith(commentSymbols)
-        && smartEditor.replace(range, `${indents}${content.replace(commentRegexp, '')}`)
+      && smartEditor.replace(range, `${indents}${content.replace(commentRegexp, '')}`)
     },
   }[type]
 

@@ -1,14 +1,38 @@
-import { resolvedConfig } from '../extension'
+import { resolvedConfig } from '../extension';
 
-const EMOJIS = [
-  '🚀', '🛸', '🛰️', '👑', '🔭', '✨', '🍀', '🍻', '🍿', '🍉',
-  '🔥', '🥑', '🎡', '🍙', '📦', '📫', '🍟', '🍭', '🍩', '🌿',
-]
+const DEFAULT_EMOJIS = [
+    '🚀',
+    '🛸',
+    '🛰️',
+    '👑',
+    '🔭',
+    '✨',
+    '🍀',
+    '🍻',
+    '🍿',
+    '🍉',
+    '🔥',
+    '🥑',
+    '🎡',
+    '🍙',
+    '📦',
+    '📫',
+    '🍟',
+    '🍭',
+    '🍩',
+    '🌿'
+];
 
 export function getRandomEmoji() {
-  if (resolvedConfig.get('emoji')) {
-    return EMOJIS[Math.floor(Math.random() * EMOJIS.length)]
-  }
+    if (resolvedConfig.get('emoji')) {
+        const emojis = (resolvedConfig.get('logEmojis') as string[]) || DEFAULT_EMOJIS;
 
-  return ''
+        if (emojis.length === 0) {
+            return '';
+        }
+
+        return emojis[Math.floor(Math.random() * emojis.length)];
+    }
+
+    return '';
 }

@@ -4,18 +4,16 @@ const BREAK_CHARACTER = ' \t\n={}()[]'
 
 // only special characters
 // 如果内容不是英文字符/数字/_/$ 的话则返回空字符串
-const ONLY_HAS_SYMBOL_REGEX = /^[^a-zA-Z0-9_$]+$/
-
-// 是不是已特殊符号作为字符串的开头
-const IS_SYMBOL_STARTS_WITH_REGEX = /^[}\])?.=;]*([\s\S]*?)(?:[{([?.=;]*)$/
+const ONLY_HAS_SYMBOL_REGEX = /^[^\w$]+$/
 
 // 判断参数是否没有闭合的括号
 // const IS_NO_CLOSING_BRACKET_REGEXP = /\(([^()]+\([^()]*(?:\)|$))$/
+// eslint-disable-next-line regexp/no-super-linear-backtracking
 const IS_NO_CLOSING_BRACKET_REGEXP = /\(([^(]*(?:\([^()]*\)[^()]*)*(?:\([^()]*)?(?:\[[^\]]*\])*)$/
 
 const IS_TAIL_SYMBOL_ENDS_REGEX = /^\?|\?$/g
 
-const PURE_VARIABLE_REGEX = /^[^a-zA-Z0-9_$]+|[^a-zA-Z0-9_$!]+$/g
+const PURE_VARIABLE_REGEX = /^[^\w$]+|[^\w$!]+$/g
 
 /**
  * Is member call
@@ -111,7 +109,7 @@ function getCorrectVariableScope(document: TextDocument, anchorPosition: Positio
       return isNoClosingBracket[1]
     }
 
-    return content.replace(IS_SYMBOL_STARTS_WITH_REGEX, '$1')
+    return content.replace(/^[}\])?.=;]+/, '').replace(/[{([?.=;]+$/, '')
   }
 
   // only character: '.', ')', ']', etc.

@@ -86,7 +86,6 @@ Merge multiple cursors on the same line:
 > [!IMPORTANT]
 > if you find that the indentation of the statement you created is incorrect, please check the indentation method and size configured in your current file or the whole project. The default of the plugin is: 2 indented spaces.
 
-
 ## Configuration
 
 You can personalize the statements you wish to insert via the Settings. (This plugin can also serve as a straightforward code snippet tool.)

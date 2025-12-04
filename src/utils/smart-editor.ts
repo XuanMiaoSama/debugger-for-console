@@ -1,5 +1,5 @@
 import type { TextDocument, TextEditor } from 'vscode'
-import { WorkspaceEdit, workspace } from 'vscode'
+import { workspace, WorkspaceEdit } from 'vscode'
 
 interface Change {
   type: 'insert' | 'replace' | 'delete'

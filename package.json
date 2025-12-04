@@ -1,204 +1,259 @@
 {
-  "publisher": "banlify",
-  "name": "debugger-for-console",
-  "displayName": "Debugger for Console",
-  "version": "0.20.2",
-  "description": "Quickly create console debugging information for multiple languages.",
-  "author": "Libon <bon.li@outlook.com>",
-  "license": "MIT",
-  "homepage": "https://github.com/libondev/debugger-for-console#readme",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/libondev/debugger-for-console"
-  },
-  "bugs": {
-    "url": "https://github.com/libondev/debugger-for-console/issues"
-  },
-  "keywords": [],
-  "categories": [
-    "Other",
-    "Debuggers"
-  ],
-  "sideEffects": false,
-  "main": "./dist/extension.js",
-  "browser": "./dist/extension.js",
-  "icon": "res/icon.png",
-  "engines": {
-    "vscode": "^1.55.0"
-  },
-  "activationEvents": [
-    "onCommand:debugger-for-console.create",
-    "onCommand:debugger-for-console.before",
-    "onCommand:debugger-for-console.remove",
-    "onCommand:debugger-for-console.comment",
-    "onCommand:debugger-for-console.uncomment"
-  ],
-  "contributes": {
-    "commands": [
-      {
-        "title": "Debugger for Console: Insert after the current line",
-        "command": "debugger-for-console.create",
-        "when": "editorTextFocus && !editorReadonly"
-      },
-      {
-        "title": "Debugger for Console: Insert before the current line",
-        "command": "debugger-for-console.before",
-        "when": "editorTextFocus && !editorReadonly"
-      },
-      {
-        "title": "Debugger for Console: Comment all statements",
-        "command": "debugger-for-console.comment",
-        "when": "editorTextFocus && !editorReadonly"
-      },
-      {
-        "title": "Debugger for Console: Uncomment all statements",
-        "command": "debugger-for-console.uncomment",
-        "when": "editorTextFocus && !editorReadonly"
-      },
-      {
-        "title": "Debugger for Console: Delete all statements",
-        "command": "debugger-for-console.remove",
-        "when": "editorTextFocus && !editorReadonly"
-      },
-      {
-        "title": "Debugger for Console: Use the latest configuration",
-        "command": "debugger-for-console.update",
-        "when": "editorTextFocus && !editorReadonly"
-      }
+    "publisher": "banlify",
+    "name": "debugger-for-console",
+    "displayName": "Debugger for Console",
+    "version": "0.20.2",
+    "description": "Quickly create console debugging information for multiple languages.",
+    "author": "Libon <bon.li@outlook.com>",
+    "license": "MIT",
+    "homepage": "https://github.com/libondev/debugger-for-console#readme",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/libondev/debugger-for-console"
+    },
+    "bugs": {
+        "url": "https://github.com/libondev/debugger-for-console/issues"
+    },
+    "keywords": [],
+    "categories": [
+        "Other",
+        "Debuggers"
     ],
-    "keybindings": [
-      {
-        "key": "ctrl+shift+down",
-        "command": "debugger-for-console.create",
-        "when": "editorTextFocus && !editorReadonly"
-      },
-      {
-        "key": "ctrl+shift+up",
-        "command": "debugger-for-console.before",
-        "when": "editorTextFocus && !editorReadonly"
-      },
-      {
-        "key": "ctrl+shift+/",
-        "command": "debugger-for-console.comment",
-        "when": "editorTextFocus && !editorReadonly"
-      },
-      {
-        "key": "ctrl+shift+u",
-        "command": "debugger-for-console.uncomment",
-        "when": "editorTextFocus && !editorReadonly"
-      },
-      {
-        "key": "ctrl+shift+backspace",
-        "command": "debugger-for-console.remove",
-        "when": "editorTextFocus && !editorReadonly"
-      }
+    "sideEffects": false,
+    "main": "./dist/extension.js",
+    "browser": "./dist/extension.js",
+    "icon": "res/icon.png",
+    "engines": {
+        "vscode": "^1.55.0"
+    },
+    "activationEvents": [
+        "onCommand:debugger-for-console.create",
+        "onCommand:debugger-for-console.before",
+        "onCommand:debugger-for-console.remove",
+        "onCommand:debugger-for-console.comment",
+        "onCommand:debugger-for-console.uncomment"
     ],
-    "configuration": {
-      "type": "object",
-      "title": "Debugger for Console",
-      "properties": {
-        "debugger-for-console.emoji": {
-          "type": "boolean",
-          "default": true,
-          "description": "Determine whether to insert an emoji."
-        },
-        "debugger-for-console.quote": {
-          "type": "string",
-          "enum": [
-            "'",
-            "\"",
-            "`"
-          ],
-          "default": "'",
-          "description": "Specify the type of quotation marks to use when inserting statements. \nTips: Some languages that require the use of double quotes may not support this feature, e.g. Go"
-        },
-        "debugger-for-console.fileDepth": {
-          "type": "number",
-          "default": 1,
-          "description": "Set the relative path depth of files. (Set to 0 to disable the path)."
-        },
-        "debugger-for-console.lineNumber": {
-          "type": "boolean",
-          "default": true,
-          "description": "Determine whether to insert the line number."
-        },
-        "debugger-for-console.outputNewline": {
-          "type": "boolean",
-          "default": false,
-          "description": "Show variables and logos in rows."
-        },
-        "debugger-for-console.ellipsis": {
-          "type": "boolean",
-          "default": false,
-          "description": "Simplify long paths and variable names."
-        },
-        "debugger-for-console.onlyVariable": {
-          "type": "string",
-          "enum": [
-            "auto",
-            "enable"
-          ],
-          "default": "auto",
-          "enumDescriptions": [
-            "Automatically detect the programming language of the current document.",
-            "Remove all redundant prompts and only output variables."
-          ],
-          "description": "Set to `enable` to cancel all redundant information and output only variables instead..\nTips: When the log output method of some languages does not support multiple parameters, it will be temporarily switched to `enable` internally, such as `Java`.. If it is a custom function, it should be set to \"enable\"."
-        },
-        "debugger-for-console.insertEmptyLine": {
-          "type": "string",
-          "default": "none",
-          "enum": [
-            "none",
-            "before",
-            "after",
-            "both",
-            "direction",
-            "directionReverse"
-          ],
-          "enumDescriptions": [
-            "Do not insert an empty line.",
-            "Insert an empty line before the debug statement.",
-            "Insert an empty line after the debug statement.",
-            "Insert an empty line before and after the debug statement.",
-            "Insert an empty line according to the direction of the debug statement.",
-            "Insert an empty line according to the reverse direction of the debug statement."
-          ],
-          "description": "Insert an empty line before or after the debug statement."
-        },
-        "debugger-for-console.wrappers": {
-          "type": "object",
-          "description": "Customize debugging statements for different languages. \nTips: We will replace {VALUE} with the logger, it is optional, so you can also modify it to 'debugger'",
-          "default": {
-            "csharp": "Console.Log({VALUE})",
-            "go": "println({VALUE})",
-            "java": "System.out.println({VALUE});",
-            "javascript": "console.log({VALUE})",
-            "php": "var_dump({VALUE})",
-            "python": "print({VALUE})",
-            "rust": "println!({VALUE})",
-            "default": "console.log({VALUE})"
-          }
+    "contributes": {
+        "commands": [
+            {
+                "title": "Debugger for Console: Insert after the current line",
+                "command": "debugger-for-console.create",
+                "when": "editorTextFocus && !editorReadonly"
+            },
+            {
+                "title": "Debugger for Console: Insert before the current line",
+                "command": "debugger-for-console.before",
+                "when": "editorTextFocus && !editorReadonly"
+            },
+            {
+                "title": "Debugger for Console: Comment all statements",
+                "command": "debugger-for-console.comment",
+                "when": "editorTextFocus && !editorReadonly"
+            },
+            {
+                "title": "Debugger for Console: Uncomment all statements",
+                "command": "debugger-for-console.uncomment",
+                "when": "editorTextFocus && !editorReadonly"
+            },
+            {
+                "title": "Debugger for Console: Delete all statements",
+                "command": "debugger-for-console.remove",
+                "when": "editorTextFocus && !editorReadonly"
+            },
+            {
+                "title": "Debugger for Console: Use the latest configuration",
+                "command": "debugger-for-console.update",
+                "when": "editorTextFocus && !editorReadonly"
+            }
+        ],
+        "keybindings": [
+            {
+                "key": "ctrl+shift+down",
+                "command": "debugger-for-console.create",
+                "when": "editorTextFocus && !editorReadonly"
+            },
+            {
+                "key": "ctrl+shift+up",
+                "command": "debugger-for-console.before",
+                "when": "editorTextFocus && !editorReadonly"
+            },
+            {
+                "key": "ctrl+shift+/",
+                "command": "debugger-for-console.comment",
+                "when": "editorTextFocus && !editorReadonly"
+            },
+            {
+                "key": "ctrl+shift+u",
+                "command": "debugger-for-console.uncomment",
+                "when": "editorTextFocus && !editorReadonly"
+            },
+            {
+                "key": "ctrl+shift+backspace",
+                "command": "debugger-for-console.remove",
+                "when": "editorTextFocus && !editorReadonly"
+            }
+        ],
+        "configuration": {
+            "type": "object",
+            "title": "Debugger for Console",
+            "properties": {
+                "debugger-for-console.emoji": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Determine whether to insert an emoji."
+                },
+                "debugger-for-console.logEmojis": {
+                    "type": "array",
+                    "default": [
+                        "🚀",
+                        "🛸",
+                        "🛰️",
+                        "👑",
+                        "🔭",
+                        "✨",
+                        "🍀",
+                        "🍻",
+                        "🍿",
+                        "🍉",
+                        "🔥",
+                        "🥑",
+                        "🎡",
+                        "🍙",
+                        "📦",
+                        "📫",
+                        "🍟",
+                        "🍭",
+                        "🍩",
+                        "🌿"
+                    ],
+                    "description": "Customize the emoji array for random selection."
+                },
+                "debugger-for-console.quote": {
+                    "type": "string",
+                    "enum": [
+                        "'",
+                        "\"",
+                        "`"
+                    ],
+                    "default": "'",
+                    "description": "Specify the type of quotation marks to use when inserting statements. \nTips: Some languages that require the use of double quotes may not support this feature, e.g. Go"
+                },
+                "debugger-for-console.fileDepth": {
+                    "type": "number",
+                    "default": 1,
+                    "description": "Set the relative path depth of files. (Set to 0 to disable the path)."
+                },
+                "debugger-for-console.lineNumber": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Determine whether to insert the line number."
+                },
+                "debugger-for-console.randomColor": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Randomly add color to the log (Only supports JavaScript/TypeScript)."
+                },
+                "debugger-for-console.logColors": {
+                    "type": "array",
+                    "default": [
+                        "#e91e63",
+                        "#9c27b0",
+                        "#673ab7",
+                        "#3f51b5",
+                        "#2196f3",
+                        "#03a9f4",
+                        "#00bcd4",
+                        "#009688",
+                        "#4caf50",
+                        "#8bc34a",
+                        "#cddc39",
+                        "#ffeb3b",
+                        "#ffc107",
+                        "#ff9800",
+                        "#ff5722",
+                        "#795548",
+                        "#9e9e9e",
+                        "#607d8b"
+                    ],
+                    "description": "Customize the color array for random coloring."
+                },
+                "debugger-for-console.outputNewline": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Show variables and logos in rows."
+                },
+                "debugger-for-console.ellipsis": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Simplify long paths and variable names."
+                },
+                "debugger-for-console.onlyVariable": {
+                    "type": "string",
+                    "enum": [
+                        "auto",
+                        "enable"
+                    ],
+                    "default": "auto",
+                    "enumDescriptions": [
+                        "Automatically detect the programming language of the current document.",
+                        "Remove all redundant prompts and only output variables."
+                    ],
+                    "description": "Set to `enable` to cancel all redundant information and output only variables instead..\nTips: When the log output method of some languages does not support multiple parameters, it will be temporarily switched to `enable` internally, such as `Java`.. If it is a custom function, it should be set to \"enable\"."
+                },
+                "debugger-for-console.insertEmptyLine": {
+                    "type": "string",
+                    "default": "none",
+                    "enum": [
+                        "none",
+                        "before",
+                        "after",
+                        "both",
+                        "direction",
+                        "directionReverse"
+                    ],
+                    "enumDescriptions": [
+                        "Do not insert an empty line.",
+                        "Insert an empty line before the debug statement.",
+                        "Insert an empty line after the debug statement.",
+                        "Insert an empty line before and after the debug statement.",
+                        "Insert an empty line according to the direction of the debug statement.",
+                        "Insert an empty line according to the reverse direction of the debug statement."
+                    ],
+                    "description": "Insert an empty line before or after the debug statement."
+                },
+                "debugger-for-console.wrappers": {
+                    "type": "object",
+                    "description": "Customize debugging statements for different languages. \nTips: We will replace {VALUE} with the logger, it is optional, so you can also modify it to 'debugger'",
+                    "default": {
+                        "csharp": "Console.Log({VALUE})",
+                        "go": "println({VALUE})",
+                        "java": "System.out.println({VALUE});",
+                        "javascript": "console.log({VALUE})",
+                        "php": "var_dump({VALUE})",
+                        "python": "print({VALUE})",
+                        "rust": "println!({VALUE})",
+                        "default": "console.log({VALUE})"
+                    }
+                }
+            }
         }
-      }
+    },
+    "scripts": {
+        "dev": "tsup src/extension.ts --watch --external vscode",
+        "build": "npm run typecheck && tsup src/extension.ts --external vscode",
+        "vscode:prepublish": "npm run build",
+        "pack": "npx vsce package --no-dependencies",
+        "release": "bumpp --commit --push --tag",
+        "typecheck": "tsc --noEmit",
+        "lint": "eslint .",
+        "lint:fix": "eslint . --fix"
+    },
+    "devDependencies": {
+        "@antfu/eslint-config": "^3.8.0",
+        "@types/vscode": "1.55.0",
+        "@vscode/vsce": "^2.19.0",
+        "eslint": "^9.14.0",
+        "tsup": "^8.3.5",
+        "typescript": "^5.6.3"
     }
-  },
-  "scripts": {
-    "dev": "tsup src/extension.ts --watch --external vscode",
-    "build": "npm run typecheck && tsup src/extension.ts --external vscode",
-    "vscode:prepublish": "npm run build",
-    "pack": "npx vsce package --no-dependencies",
-    "release": "bumpp --commit --push --tag",
-    "typecheck": "tsc --noEmit",
-    "lint": "eslint src --ext ts",
-    "lint:fix": "eslint src --ext ts --fix"
-  },
-  "devDependencies": {
-    "@antfu/eslint-config": "^0.39.8",
-    "@types/vscode": "1.55.0",
-    "@vscode/vsce": "^2.19.0",
-    "eslint": "^8.45.0",
-    "tsup": "^7.1.0",
-    "typescript": "^4.9.5"
-  }
 }
