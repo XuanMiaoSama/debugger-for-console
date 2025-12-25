@@ -3,6 +3,7 @@ import type { TextDocument } from 'vscode'
 
 import { getQuote } from '../features/quote'
 import { getRandomEmoji } from '../features/random-emoji'
+import { getConsoleColor } from '../features/console-color'
 import { getFileDepth } from '../features/file-depth'
 import { getNumberLine } from '../features/number-line'
 import { getVariableCompletion } from '../features/variable-completion'
@@ -13,6 +14,7 @@ import { getBlockBoundaryLineWithIndent } from '../utils/block-scope'
 import {
   VARIABLE_PLACEHOLDER,
   VARIABLE_PLACEHOLDER_REGEX,
+  JAVASCRIPT_ALIAS,
   getEllipsisString,
   getLanguageStatement,
 } from '../utils/shared'
@@ -49,6 +51,22 @@ function getStatementGenerator(document: TextDocument) {
     }
 
     const quote = getQuote(document.languageId)
+    const isJavaScript = JAVASCRIPT_ALIAS.includes(document.languageId)
+    const consoleColor = getConsoleColor()
+
+    if (isJavaScript && consoleColor) {
+      const template = `${quote}%c${getRandomEmoji()}${getFileDepth(
+        document,
+      )}$1/($2):${getOutputNewline()}${quote}, ${quote}color: ${consoleColor}${quote}$3`
+
+      return (lineNumber: number, text: string) =>
+        formatter(
+          template
+            .replace('$1', getNumberLine(lineNumber) as string)
+            .replace('$2', getEllipsisString(text, true))
+            .replace('$3', text ? `, ${text}` : ''),
+        )
+    }
 
     const template = `${quote}${getRandomEmoji()}${getFileDepth(
       document,

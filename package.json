@@ -131,6 +131,40 @@
           ],
           "description": "Customize the list of emojis to randomly select from. You can add or remove emojis as you like."
         },
+        "debugger-for-console.consoleColor": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable random console colors for debug statements (only works in browser console for JavaScript/TypeScript). When disabled, no color styling will be applied."
+        },
+        "debugger-for-console.consoleColorList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "#e74c3c",
+            "#3498db",
+            "#2ecc71",
+            "#f39c12",
+            "#9b59b6",
+            "#1abc9c",
+            "#e67e22",
+            "#34495e",
+            "#16a085",
+            "#27ae60",
+            "#2980b9",
+            "#8e44ad",
+            "#c0392b",
+            "#d35400",
+            "#7f8c8d",
+            "#2c3e50",
+            "#f1c40f",
+            "#e84393",
+            "#00b894",
+            "#6c5ce7"
+          ],
+          "description": "Customize the list of colors (hex codes) for console output styling. Only effective when consoleColor is enabled."
+        },
         "debugger-for-console.quote": {
           "type": "string",
           "enum": [
